@@ -1,0 +1,49 @@
+syntax = "proto3";
+package pokerlab;
+
+service TodoService {
+    rpc GetTodos (GetTodoRequest) returns (stream GetTodoResponse);
+    rpc CreateTodo (CreateTodoRequest) returns (CreateTodoResponse);
+    rpc UpdateTodo (UpdateTodoRequest) returns (UpdateTodoResponse);
+    rpc DeleteTodo (DeleteTodoRequest) returns (DeleteTodoResponse);
+}
+
+message GetTodoRequest {
+    uint32 timestamp = 1;
+}
+
+message Todo {
+    uint32 id = 1;
+    string title = 2;
+    bool completed = 3;
+}
+
+message GetTodoResponse {
+    repeated Todo items = 1;
+}
+
+message CreateTodoRequest {
+    string title = 1;
+}
+
+message CreateTodoResponse {
+    bool success = 1;
+}
+
+message UpdateTodoRequest {
+    uint32 id = 1;
+    string title = 2;
+    bool completed = 3;
+}
+
+message UpdateTodoResponse {
+    bool success = 1;
+}
+
+message DeleteTodoRequest {
+    uint32 id = 1;
+}
+
+message DeleteTodoResponse {
+    bool success = 1;
+}
